@@ -26,13 +26,15 @@ class App extends React.Component {
     // Load async data.
     // Update state with new data.
     // Re-render our component.
-    let userData = await API.get('/',{
-      params: {
-        results: 1,
-        inc: 'name,email,picture'
-      }
-    });
-     // Parse the results for ease of use.
+    try{
+
+      let userData = await API.get('/',{
+        params: {
+          results: 1,
+          inc: 'name,email,picture'
+        }
+      });
+      // Parse the results for ease of use.
      userData = userData.data.results[0];
 
      // Update state with new data and re-render our component.
@@ -48,6 +50,10 @@ class App extends React.Component {
          email
        }
      });
+    }catch (e) {
+      console.log(`😱 Axios request failed: ${e}`);
+    }
+     
   }
 }
 
